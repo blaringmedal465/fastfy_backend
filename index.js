@@ -2,18 +2,21 @@ require('dotenv').config();
 
 const fastify = require('fastify')({ logger: true });
 
-// Import modules
+// Imports (add this)
+const { clerkPlugin } = require('@clerk/fastify');
+
+// Existing imports...
 const prisma = require('./src/prisma/client');
 const redis = require('./src/redis/client');
 const rateLimitConfig = require('./src/plugins/rateLimit');
 const routes = require('./src/routes/index');
 
-// Decorate fastify with prisma & redis (accessible in all routes/plugins)
 fastify.decorate('prisma', prisma);
 fastify.decorate('redis', redis);
 
-// Register plugins & routes
+// Registers (add clerkPlugin here — order flexible)
 fastify.register(rateLimitConfig);
+fastify.register(clerkPlugin);  // Reads CLERK_SECRET_KEY from env automatically
 fastify.register(routes);
 
 const start = async () => {
