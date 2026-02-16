@@ -7,7 +7,6 @@ const protectedRoutes = require('./protected');
 
 async function routes(fastify) {
   fastify.register(clerkAuth);  // Global Clerk setup (production JWT verify)
-
   fastify.register(healthRoute);
   fastify.register(testDbRoute);
   fastify.register(testRedisRoute);
