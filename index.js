@@ -19,7 +19,7 @@ fastify.register(rateLimitConfig);
 fastify.register(clerkPlugin);  // Reads CLERK_SECRET_KEY from env automatically
 fastify.register(routes);
 fastify.register(cors, {
-  origin: 'http://gcsewizard.bid',  // Frontend domain
+  origin: 'https://gcsewizard.bid',  // Frontend domain
   credentials: true,
 });
 const start = async () => {
